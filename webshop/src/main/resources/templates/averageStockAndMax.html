@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>E-shop</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<h1><u>Benny`s Shop</u></h1>
+
+<table class="table table-hover">
+    <tr>
+        <th><a th:href="@{|/only-available|}"><button type="submit" class="btn btn-primary">ONLY AVAILABLE</button></a></th>
+        <th><a th:href="@{|/cheapest-first|}"><button type="submit" class="btn btn-primary">CHEAPEST FIRST</button></a></th>
+        <th><a th:href="@{|/contains-nike|}"><button type="submit" class="btn btn-primary">CONTAINS NIKE</button></a></th>
+        <th><a th:href="@{|/average-stock|}"><button type="submit" class="btn btn-primary">AVERAGE STOCK</button></a></th>
+        <th><a th:href="@{|/most-expensive|}"><button type="submit" class="btn btn-primary">MOST EXPENSIVE AVAILABLE</button></a></th>
+    </tr>
+</table>
+
+<form id="search" action="/" method="POST">
+    <label for="search">Search for: <br>
+        <input type="search" placeholder="...something like nike">
+        <button type="submit">Search</button>
+    </label>
+</form>
+
+<table class="table table-hover">
+    <tr>
+        <h1 th:text="${averageStock} ? 'Average stock: ' + ${averageStock} : ''"></h1>
+    </tr>
+</table>
+
+<table class="table table-hover">
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity of stock</th>
+    </tr>
+
+    <tr>
+        Most expensive product:
+        <td th:text="${itemMax.name}"></td>
+        <td th:text="${itemMax.description}"></td>
+        <td th:text="${itemMax.price} + ' CZK'"></td>
+        <td th:text="${itemMax.quantityOfStock}"></td>
+    </tr>
+
+</table>
+
+</body>
+</html>

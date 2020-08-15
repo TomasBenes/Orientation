@@ -50,17 +50,17 @@ public class ShopItems {
                 .orElse(0);
     }
 
-    /*public double getMostExpensive () {
-        return this.shopItems.stream()
-                .mapToDouble(Item::getPrice)
-                .max()
-                .orElse(0);
-    }*/
 
     public Item getMostExpensive () {
         return this.shopItems.stream()
                 .max(Comparator.comparing(Item::getPrice))
                 .get();
+    }
+
+    public List<Item> getSearch (String keyword) {
+        return this.shopItems.stream()
+                .filter(item -> item.getName().toLowerCase().contains(keyword) || item.getDescription().toLowerCase().contains(keyword))
+                .collect(Collectors.toList());
     }
 
 }

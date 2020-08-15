@@ -4,6 +4,8 @@ import com.spring.webshop.repository.ShopItems;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ItemController {
@@ -48,16 +50,10 @@ public class ItemController {
         model.addAttribute("itemMax", shopItems.getMostExpensive());
         return "averageStockAndMax";
     }
-/*
-    @GetMapping("/add-book")
-    public String addBook(){
-        return "add-book";
-    }
 
-    @RequestMapping(value = "/add-book", method = RequestMethod.POST)
-    // @PostMapping("/add-book")
-    public String addNewBook(@ModelAttribute Book book){
-        bookshelf.addBook(book);
-        return "redirect:/";
-    }*/
+    @PostMapping("/search")
+    public String displaySearch (Model model, @RequestParam String keyword){
+        model.addAttribute("itemsSearch", shopItems.getSearch(keyword));
+        return "index";
+    }
 }

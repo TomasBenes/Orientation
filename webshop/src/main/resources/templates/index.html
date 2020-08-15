@@ -19,10 +19,25 @@
     </tr>
 </table>
 
-<form id="search" action="/" method="POST">
+<form id="search" action="/search" method="POST">
     <label for="search">Search for: <br>
-        <input type="search" placeholder="...something like nike">
+        <input type="search" placeholder="...something like nike" name="searchButton">
         <button type="submit">Search</button>
+        <table class="table table-hover">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Quantity of stock</th>
+            </tr>
+
+            <tr th:each="item:${itemsSearch}">
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.description}"></td>
+                <td th:text="${item.price} + ' CZK'"></td>
+                <td th:text="${item.quantityOfStock}"></td>
+            </tr>
+        </table>
     </label>
 </form>
 

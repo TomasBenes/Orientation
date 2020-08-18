@@ -53,7 +53,19 @@ public class ItemController {
 
     @PostMapping("/search")
     public String displaySearch (Model model, @RequestParam String keyword){
-        model.addAttribute("itemsSearch", shopItems.getSearch(keyword));
+        model.addAttribute("items", shopItems.getSearch(keyword));
         return "index";
+    }
+
+    @GetMapping("/more-filters")
+    public String homePageEndpoints (Model model){
+        model.addAttribute("items", shopItems.getShopItems());
+        return "endpoints";
+    }
+
+    @GetMapping("/filter-by-type")
+    public String displayFilteredByType (Model model, @RequestParam String buttonName){
+        model.addAttribute("items", shopItems.getFilteredByType(buttonName));
+        return "endpoints";
     }
 }

@@ -4,6 +4,7 @@ import com.spring.webshop.repository.ShopItems;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ItemController {
 
     ShopItems shopItems = new ShopItems();
-    static final String addBook = "/add-book";
 
 
     @GetMapping("/")
@@ -63,9 +63,23 @@ public class ItemController {
         return "endpoints";
     }
 
-    @GetMapping("/filter-by-type")
-    public String displayFilteredByType (Model model, @RequestParam String buttonName){
+    @GetMapping("/filter-by-type/{buttonName}")
+    public String displayFilteredByType (Model model, @PathVariable String buttonName){
         model.addAttribute("items", shopItems.getFilteredByType(buttonName));
+        return "endpoints";
+    }
+
+    @GetMapping("/price-in-eur")
+    public String displayPriceInEur (Model model){
+        model.addAttribute("items", shopItems.getPriceInEur());
+        return "endpoints";//MAM TED VSECHNY CENY V EURECH, V TETO FUNKCI POTREBUJI PRIDAT EUR
+    }
+
+    @PostMapping("/filter-by-price")
+    public String displayFilterByPrice (Model model, @RequestParam int givenPrice){
+        model.addAttribute("items", shopItems.getAbovePrice(givenPrice));
+        model.addAttribute("items", shopItems.getBelowPrice(givenPrice));
+        model.addAttribute("items", shopItems.getExactlyPrice(givenPrice));
         return "endpoints";
     }
 }

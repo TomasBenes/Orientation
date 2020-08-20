@@ -65,7 +65,32 @@ public class ShopItems {
 
     public List<Item> getFilteredByType (String buttonName) {
         return this.shopItems.stream()
-                .filter(item -> item.getType().contains(buttonName))
+                .filter(item -> item.getType().toUpperCase().contains(buttonName))
+                .collect(Collectors.toList());
+    }
+
+    public List<Item> getPriceInEur () {
+        return this.shopItems.stream()
+                .map(item -> {item.setPrice(item.getPrice()/26); return item;})
+                .collect(Collectors.toList());
+    }
+
+
+    public List<Item> getAbovePrice (int givenPrice) {
+        return this.shopItems.stream()
+                .filter(item -> item.getPrice() > givenPrice)
+                .collect(Collectors.toList());
+    }
+
+    public List<Item> getBelowPrice (int givenPrice) {
+        return this.shopItems.stream()
+                .filter(item -> item.getPrice() < givenPrice)
+                .collect(Collectors.toList());
+    }
+
+    public List<Item> getExactlyPrice (int givenPrice) {
+        return this.shopItems.stream()
+                .filter(item -> item.getPrice() == givenPrice)
                 .collect(Collectors.toList());
     }
 

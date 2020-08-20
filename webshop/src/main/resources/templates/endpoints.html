@@ -20,20 +20,20 @@
 
 <table class="table table-hover">
     <tr>
-        <th><a th:href="@{|/filter-by-type|}"><button type="submit" class="btn btn-primary">CLOTHES AND SHOES</button></a></th>
-        <th><a th:href="@{|/cheapest-first|}"><button type="submit" class="btn btn-primary">ELECTRONICS</button></a></th>
-        <th><a th:href="@{|/contains-nike|}"><button type="submit" class="btn btn-primary">BEVERAGES AND SNACKS</button></a></th>
-        <th><a th:href="@{|/average-stock|}"><button type="submit" class="btn btn-primary">EURO</button></a></th>
+        <th><a th:href="@{|/filter-by-type/CLOTHES AND SHOES|}"><button class="btn btn-primary">CLOTHES AND SHOES</button></a></th>
+        <th><a th:href="@{|/filter-by-type/ELECTRONICS|}"><button class="btn btn-primary">ELECTRONICS</button></a></th>
+        <th><a th:href="@{|/filter-by-type/BEVERAGES AND SNACKS|}"><button class="btn btn-primary">BEVERAGES AND SNACKS</button></a></th>
+        <th><a th:href="@{|/price-in-eur|}"><button type="submit" class="btn btn-primary">EURO</button></a></th>
         <th><a th:href="@{|/most-expensive|}"><button type="submit" class="btn btn-primary">ORIGINAL CURRENCY</button></a></th>
     </tr>
 </table>
 
-<form id="search" action="/search" method="POST">
-    <button type="submit">Above</button>
-    <button type="submit">Below</button>
-    <button type="submit">Exactly</button>
-    <label for="search">Search for: <br>
-        <input type="search" placeholder="...something like nike" name="keyword">
+<form id="search" action="/filter-by-price" method="POST">
+    <button type="submit" name="action" value="Above">Above</button>
+    <button type="submit" name="action" value="Below">Below</button>
+    <button type="submit" name="action" value="Exactly">Exactly</button>
+    <label for="search">Filter by price: <br>
+        <input type="search" placeholder="...e.g.: 300" name="givenPrice">
     </label>
 </form>
 

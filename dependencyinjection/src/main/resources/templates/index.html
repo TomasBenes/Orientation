@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Utilities</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<h1>Useful utilities</h1>
+<ul th:href="@{|/useful|}">
+    <li><a href="/useful/colored">Colored Background</a></li>
+    <li><a href="/useful/email">Email validator</a></li>
+    <li><a href="/useful/email?email=is@this.valid">Email example</a></li>
+    <li><a href="/useful/colored">Caesar encoder/decoder</a></li>
+</ul>
+</body>
+</html>

@@ -35,4 +35,16 @@ public class UtilityServiceController {
         return "email";
     }
 
+    @GetMapping("useful/encoder")
+    public String encode (Model model, @RequestParam String textToEncode, @RequestParam Integer numberOfShift) {
+        model.addAttribute("text", utilityService.caesar(textToEncode, numberOfShift));
+        return "caesar";
+    }
+
+    @GetMapping("useful/decoder")
+    public String decode (Model model, @RequestParam String textToDecode, @RequestParam Integer numberOfShift){
+        model.addAttribute("text", utilityService.caesar(textToDecode, -numberOfShift));
+        return "caesar";
+    }
+
 }

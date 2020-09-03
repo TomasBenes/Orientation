@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Fox</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-$END$
+<ul>
+    <li><a th:href="@{'/?name=' + ${fox.name}}">Information</a></li><br>
+    <li><a th:href="@{'/nutrition?name=' + ${fox.name}}">Nutrition Store</a></li><br>
+    <li><a th:href="@{'/trickCenter?name=' + ${fox.name}}">Trick Center</a></li><br>
+    <li><a th:href="@{'/actionHistory?name=' + ${fox.name}}">Action History</a></li><br>
+</ul>
+<form th:action="@{'/trickCenter?name=' + ${fox.name}}" method="post">
+    <label for="foxTricks">Choose a trick:</label>
+    <select name="trick" id="foxTricks">
+        <option value="hunting">Hunting</option>
+        <option value="fishing">Fishing</option>
+        <option value="scratching">Scratching his/her own ass</option>
+        <option value="fornicating">Fornicating</option>
+    </select>
+    <input type="submit" value="Learn">
+</form>
 </body>
 </html>

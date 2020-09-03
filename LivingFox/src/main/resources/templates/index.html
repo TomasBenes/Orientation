@@ -7,9 +7,23 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-    <li>Information</li>
-    <img src="../static/images/greenfox.png" alt="Fox">
-    <p>This is Mr.Fox. Currently living on... He knows 2 tricks</p>
+<ul>
+    <li><a th:href="@{'/?name=' + ${fox.name}}">Information</a></li><br>
+    <li><a th:href="@{'/nutrition?name=' + ${fox.name}}">Nutrition Store</a></li><br>
+    <li><a th:href="@{'/trickCenter?name=' + ${fox.name}}">Trick Center</a></li><br>
+    <li><a th:href="@{'/actionHistory?name=' + ${fox.name}}">Action History</a></li><br>
+</ul>
+    <img src="/images/greenfox.png" alt="Fox">
+    <p th:text="'This is ' + ${fox.name} + '. Currently living on ' + ${fox.food} + ' and ' + ${fox.drink} + '. He knows ' + ${fox.tricks.size()} + ' tricks.'"></p>
     <h1>Known tricks</h1>
+    <p th:text="${fox.tricks.size() == 0} ? 'You know no tricks, yet. Go and learn some'"></p>
+    <ul th:each="trick : ${fox.tricks}">
+        <li th:text="${trick}"></li>
+    </ul>
+    <h1>Action History</h1>
+    <p th:text="${fox.actionHistory.size() == 0} ? 'You have no actions, yet. Go and do some'"></p>
+    <ul th:each="action : ${fox.get5LatestActions()}">
+        <li th:text="${action}"></li>
+    </ul>
 </body>
 </html>

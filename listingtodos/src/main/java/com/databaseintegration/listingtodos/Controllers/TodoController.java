@@ -2,26 +2,42 @@ package com.databaseintegration.listingtodos.Controllers;
 
 import com.databaseintegration.listingtodos.Model.Todo;
 import com.databaseintegration.listingtodos.Repositories.TodoRepo;
+import com.databaseintegration.listingtodos.Service.TodoService;
+import com.databaseintegration.listingtodos.Service.TodoServiceImpl;
+import com.sun.jmx.snmp.SnmpOidTable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/todo")
 public class TodoController {
 
+    private final TodoService todoService;
     private final TodoRepo todoRepo;
 
-    public TodoController (TodoRepo todoRepo) {
+    public TodoController (TodoRepo todoRepo, TodoService todoService) {
         this.todoRepo = todoRepo;
+        this.todoService = todoService;
     }
 
-
     @GetMapping("/list")
-    public String list(Model model){
-        model.addAttribute("todos", this.todoRepo.findAll());
+    public String list(Model model, @RequestParam(required = false) boolean isActive){
+        if (isActive) {
+        model.addAttribute("todos", this.todoService.isActive());} else {
+            model.addAttribute("todos", this.todoRepo.findAll()); }
         return "index";
+    }
+
+    @GetMapping("/add")
+    public String addTodo (){
+        return "addTodo";
+    }
+
+    @PostMapping("/add")
+    public String postTodo (@RequestParam String title){
+        this.todoRepo.save(new Todo(title));
+        return "redirect:/todo/list";
     }
 
 }

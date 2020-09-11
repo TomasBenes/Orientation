@@ -40,4 +40,21 @@ public class TodoController {
         return "redirect:/todo/list";
     }
 
+    @DeleteMapping("/delete/{id}")
+    public String deleteTodo (@PathVariable (name = "id") long id){
+        this.todoRepo.deleteById(id);
+        return "redirect:/todo/list";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String editTodo (){
+        return "editTodo";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String postEditTodo (@PathVariable (name = "id") long id, @RequestParam String description){
+        this.todoRepo.findById(id).save(new Todo(description));
+        return "redirect:/todo/list";
+    }
+
 }

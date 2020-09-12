@@ -20,6 +20,6 @@ public class TodoServiceImpl implements TodoService{
 
     @Override
     public List<Todo> isActive() {
-        return this.todoRepo.findAll().stream().filter(todo -> !todo.isDone()).collect(Collectors.toList());
+        return this.todoRepo.findAll().stream().filter(todo -> !todo.getDone()).collect(Collectors.toList());
     }
 }

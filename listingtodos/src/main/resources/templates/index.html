@@ -22,11 +22,13 @@
         <td th:text="${todo.title}"></td>
         <td th:text="${todo.urgent}"></td>
         <td th:text="${todo.done}"></td>
-        <td >
-            <a th:href="@{'delete/__${todo.id}__'}" class="btn btn-danger">delete</a>
+        <td>
+            <form action="#" th:action="@{/todo/delete/} + ${todo.id}" method="post">
+                <input type="submit" value="Delete"/>
+            </form>
         </td>
         <td >
-            <a th:href="@{'edit/__${todo.id}__'}" class="btn btn-danger">edit</a>
+            <a th:href="@{/todo/edit/} + ${todo.id}">Edit</a>
         </td>
     </tr>
 

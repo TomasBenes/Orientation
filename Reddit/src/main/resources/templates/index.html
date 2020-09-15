@@ -21,13 +21,11 @@
         <td th:text="${post.id}"></td>
         <td th:text="${post.votes}"></td>
         <td>
-            <form action="#" th:action="@{/}" method="post">
-                <button type="submit">+</button>
-                <button type="submit">-</button>
-            <!--<div id="voting">
-                <div class="upvote">+</div>
-                <div class="downvote">-</div>
-            </div>-->
+            <form action="#" th:action="@{/like/} + ${post.id}" method="post">
+                <button type="submit" th:field="${post.votes}">+</button>
+            </form>
+            <form action="#" th:action="@{/dislike/} + ${post.id}" method="post">
+                <button type="submit" th:field="${post.votes}">-</button>
             </form>
         </td>
         <td th:text="${post.title}"></td>

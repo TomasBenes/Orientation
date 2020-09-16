@@ -47,15 +47,5 @@ public class PostController {
         return "redirect:/";
     }
 
-    @GetMapping("/register")
-    public String getRegisterPage(){
-        return "register";
-    }
 
-    /*@PostMapping("/login")
-    public String postLoginPage(@RequestParam String name){
-        Fox fox = new Fox(name, "meat", "milk", new ArrayList<String>());
-        this.foxService.addFox(fox);
-        return "redirect:/" + "?name=" + name;
-    }*/
 }

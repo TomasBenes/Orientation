@@ -16,10 +16,10 @@ public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
-    String title;
-    String url;
-    long votes;
+    private long id;
+    private String title;
+    private String url;
+    private long votes;
 
     public Post(String title, String url, long votes) {
         this.title = title;

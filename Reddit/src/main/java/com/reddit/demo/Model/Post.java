@@ -3,10 +3,7 @@ package com.reddit.demo.Model;
 import com.sun.javafx.beans.IDProperty;
 
 import javax.annotation.Generated;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.print.DocFlavor;
 import java.net.URL;
 
@@ -21,6 +18,9 @@ public class Post {
     private String url;
     private long votes;
 
+    @ManyToOne
+    private User user;
+
     public Post(String title, String url, long votes) {
         this.title = title;
         this.url = url;
@@ -28,6 +28,14 @@ public class Post {
     }
 
     public Post() {
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public long getId() {

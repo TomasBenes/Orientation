@@ -2,7 +2,10 @@ package com.reddit.demo.Controller;
 
 import com.reddit.demo.Model.Post;
 import com.reddit.demo.Repository.PostRepo;
+import com.reddit.demo.Service.PostService;
 import com.reddit.demo.Service.PostServiceImpl;
+import com.reddit.demo.Service.UserService;
+import com.reddit.demo.Service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,15 +14,18 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class PostController {
 
-    private final PostServiceImpl postService;
+    private final PostService postService;
+    private final UserService userService;
 
 
-    public PostController (PostServiceImpl postService){
+    public PostController (PostService postService, UserService userService){
         this.postService = postService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
-    public String list(Model model){
+    public String list(Model model, @RequestParam String username){
+            model.addAttribute("user",this.userService.findByUsername(username));
             model.addAttribute("posts", this.postService.allPosts());
         return "index";
     }
@@ -36,15 +42,19 @@ public class PostController {
         return "redirect:/";
     }
 
-    @GetMapping("/submit")
-    public String submit () {
+    @GetMapping("/submit/{username}")
+    public String submit (@PathVariable String username, Model model) {
+        this.userService.findByUsername(username);
+        model.addAttribute("user",this.userService.findByUsername(username));
         return "submit";
     }
 
-    @PostMapping("/submit")
-    public String addPost (@ModelAttribute Post post){
+    @PostMapping("/submit/")
+    public String addPost (@RequestParam String username, @ModelAttribute Post post){
+        /*this.userService.findByUsername(username).getUserPosts().add(post);*/
+        post.setUser(this.userService.findByUsername(username));
         this.postService.addPost(post);
-        return "redirect:/";
+        return "redirect:/" + "?username=" + username;
     }
 
 

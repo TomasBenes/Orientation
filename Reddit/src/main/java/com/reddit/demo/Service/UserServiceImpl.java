@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,7 +21,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) {
-        this.userRepo.save(user);
+        if (this.userRepo.findUserByUsername(user.getUsername()).isPresent()){
+
+        } else {
+            this.userRepo.save(user);
+        }
+
     }
 
     @Override
@@ -29,7 +35,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByUsernamePassword(String username, String password) {
+        return  this.userRepo.findUserByUsernameAndPassword(username, password);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return this.userRepo.findUserByUsername(username).orElse(null);
+    }
+
+    @Override
     public List<User> findAllUsers() {
         return this.userRepo.findAll();
     }
+
+
 }

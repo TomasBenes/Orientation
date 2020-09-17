@@ -35,9 +35,9 @@ public class UserController {
         return "login";
     }
 
-    @PostMapping("/login/{id}")
-    public String postLoginPage(@PathVariable long id){
-        this.userService.findById(id);
-        return "redirect:/";
+    @PostMapping("/login")
+    public String postLoginPage(@RequestParam String username, @RequestParam String password){
+        this.userService.findByUsernamePassword(username, password);
+        return "redirect:/" + "?username=" + username;
     }
 }

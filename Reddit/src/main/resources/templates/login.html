@@ -9,7 +9,7 @@
 <body th:href="@{/login}">
 <h1>Welcome to the Reddit login page</h1>
 <p>Please provide a username and password:</p>
-<form id="login" action="#" th:action="@{/login/} + ${user.id}" method="POST"> <!--th:field="${user.username}"-->
+<form id="login" th:action="@{/login}" method="POST"> <!--th:field="${user.username}"-->
     <label for="login">UserName: <input type="text" placeholder="...your username" name="username">
     </label>
     <label for="login">Password: <input type="password" placeholder="...your password" name="password">

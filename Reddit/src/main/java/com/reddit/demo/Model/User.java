@@ -1,9 +1,8 @@
 package com.reddit.demo.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class User {
@@ -15,6 +14,9 @@ public class User {
     private String username;
     private String password;
 
+    @OneToMany
+    private List<Post> userPosts;
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
@@ -25,6 +27,14 @@ public class User {
 
     public long getId() {
         return id;
+    }
+
+    public List<Post> getUserPosts() {
+        return userPosts;
+    }
+
+    public void setUserPosts(List<Post> userPosts) {
+        this.userPosts = userPosts;
     }
 
     public void setId(long id) {

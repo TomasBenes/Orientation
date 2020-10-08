@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>URL aliaser</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<h1>Default</h1>
+<form th:action="@{|/save-link|}" method="post">
+    <label for="url">URL</label>
+    <input type="text" name="url" id="url"/><br>
+    <label for="alias">Alias</label>
+    <input type="text" name="alias" id="alias"/><br>
+    <input type="submit" value="Submit"/>
+</form>
+<h1 th:text="${successMessage}"></h1>
+
+</body>
+</html>
